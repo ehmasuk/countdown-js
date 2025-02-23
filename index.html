@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Countdown</title>
+        <!-- tailwindcss cdn -->
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    </head>
+    <body class="p-5">
+        <!-- countdown -->
+        <div
+            class="countdown flex gap-4 mt-5 [&>div]:bg-indigo-500 [&>div]:text-white [&>div]:font-bold [&>div]:text-2xl [&>div]:rounded [&>div]:w-12 [&>div]:h-12 [&>div]:flex [&>div]:justify-center [&>div]:items-center"
+        >
+            <div class="days"></div>
+            <div class="hours"></div>
+            <div class="minutes"></div>
+            <div class="seconds"></div>
+        </div>
+
+        <!-- timer -->
+        <div
+            class="timer flex gap-4 mt-5 [&>div]:bg-indigo-500 [&>div]:text-white [&>div]:font-bold [&>div]:text-2xl [&>div]:rounded [&>div]:w-12 [&>div]:h-12 [&>div]:flex [&>div]:justify-center [&>div]:items-center"
+        >
+            <div class="days"></div>
+            <div class="hours"></div>
+            <div class="minutes"></div>
+            <div class="seconds"></div>
+        </div>
+
+        <script src="countdown.js"></script>
+
+        <script>
+            const countdown = new Countdown({
+                className: "countdown",
+                destination: "12/12/26",
+            });
+
+            const timer = new Countdown({
+                className: "timer",
+                destination: [0, 1, 0, 0],
+            });
+        </script>
+    </body>
+</html>
