@@ -1,4 +1,6 @@
 class Countdown {
+    labels = true
+
     constructor(options) {
         if (!options?.className || !options?.destination) {
             return console.warn("Countdown requires 'className' and 'destination' properties.");
@@ -11,8 +13,10 @@ class Countdown {
             return console.warn(`No elements found with class name: ${this.countdownClassName}`);
         }
 
+        if(options?.labels === false) this.labels = false
+
         if (Array.isArray(options.destination)) {
-            if (!options.destination.reduce((acc, val) => (acc = +val), 0)) {
+            if (!options.destination.reduce((acc, val) => acc = +val, 0)) {
                 this.destination = options.destination;
                 this.startTimer(options);
             } else {
@@ -90,11 +94,20 @@ class Countdown {
     }
 
     updateUI(day, hour, minute, second) {
-        this.allCountdownDivs.forEach((parentDiv) => {
-            parentDiv.querySelectorAll(".days").forEach((el) => (el.innerText = day));
-            parentDiv.querySelectorAll(".hours").forEach((el) => (el.innerText = hour));
-            parentDiv.querySelectorAll(".minutes").forEach((el) => (el.innerText = minute));
-            parentDiv.querySelectorAll(".seconds").forEach((el) => (el.innerText = second));
-        });
+        if(this.labels){
+            this.allCountdownDivs.forEach((parentDiv) => {
+                parentDiv.querySelectorAll(".days").forEach((el) => (el.innerText = day + "d"));
+                parentDiv.querySelectorAll(".hours").forEach((el) => (el.innerText = hour + "h"));
+                parentDiv.querySelectorAll(".minutes").forEach((el) => (el.innerText = minute + "m"));
+                parentDiv.querySelectorAll(".seconds").forEach((el) => (el.innerText = second + "s"));
+            });
+        }else{
+            this.allCountdownDivs.forEach((parentDiv) => {
+                parentDiv.querySelectorAll(".days").forEach((el) => (el.innerText = day));
+                parentDiv.querySelectorAll(".hours").forEach((el) => (el.innerText = hour));
+                parentDiv.querySelectorAll(".minutes").forEach((el) => (el.innerText = minute));
+                parentDiv.querySelectorAll(".seconds").forEach((el) => (el.innerText = second));
+            });
+        }
     }
 }

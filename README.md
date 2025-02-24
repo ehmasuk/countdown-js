@@ -109,6 +109,18 @@ If the destination is a string, it converts it into a timestamp and starts a cou
 
 The plugin looks for child elements within the specified container that have classes .days, .hours, .minutes, and .seconds and updates them every second.
 
+## Options
+
+labels - Boolean - default: true - If set to false, the plugin will not update the UI with day(d), hour(h), minute(m), and second(s) labels.
+
+```javascript
+const countdown = new Countdown({
+    className: "countdown",
+    destination: "12/12/26",
+    labels: false,
+});
+```
+
 ## Callbacks
 
 You can execute a callback function when the countdown reaches zero by passing a callback function to the `onFinish` option.
