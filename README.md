@@ -19,6 +19,10 @@ The plugin dynamically updates elements on the page based on a provided class na
 -   **Lightweight:**  
     No dependencies required – pure JavaScript.
 
+## Demo
+
+Check out the live demo: [Live Demo](https://ehmasuk.github.io/countdown-js)
+
 ## Installation
 
 Simply include the JavaScript file in your project.
