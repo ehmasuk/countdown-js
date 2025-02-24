@@ -1,142 +1,154 @@
 # Countdown Timer
 
-A lightweight, easy, vanilla JavaScript countdown timer that supports two modes:
+A small, easy-to-use JavaScript countdown timer that works in two ways:
 
--   **Countdown Mode:** Count down to a specific date.
--   **Timer Mode:** Count down from a specified time interval (days, hours, minutes, seconds) with localStorage persistence.
+- **Countdown Mode:** Count down to a specific date.
+- **Timer Mode:** Count down from a set number of days, hours, minutes, and seconds. (It saves progress in your browser.)
 
-The plugin dynamically updates elements on the page based on a provided class name and child selectors (`.days`, `.hours`, `.minutes`, `.seconds`).
+The timer updates elements on your page that have the right class names.
+
+---
 
 ## Features
 
--   **Dual Modes:**
-    -   Countdown to a future date.
-    -   Countdown timer that persists state using `localStorage`.
--   **Customizable UI:**  
-    Update UI elements with class names dynamically.
--   **Callbacks:**  
-    Option to execute a callback when the countdown/timer finishes.
--   **Lightweight:**  
-    No dependencies required – pure JavaScript.
+- **Two Modes:**
+  - Countdown to a future date.
+  - Countdown for a specific time interval.
+- **Custom UI:**  
+  Use your own HTML elements.
+- **Callbacks:**  
+  Run a function when the timer ends.
+- **Lightweight:**  
+  No extra libraries needed.
+
+---
 
 ## Demo
 
-Check out the live demo: [Live Demo](https://ehmasuk.github.io/countdown-js)
+See the live demo here: [Live Demo](https://ehmasuk.github.io/countdown-js)
+
+---
 
 ## Installation
 
-Simply include the JavaScript file in your project.
+Include the JavaScript file in your project:
 
 ```html
 <script src="./countdown.js"></script>
 ```
 
-## Initialization
+---
 
-Initialize the countdown timer with the following options:
-
-```javascript
-const countdown = new Countdown({
-    className: "countdown", // Class name of the elements to update.
-    destination: "12/12/26", // Destination date in the format "MM/DD/YYYY".
-    onFinish: () => console.log("Countdown finished!"), // Optional callback for when the countdown reaches zero.
-});
-```
-
-## Usage
+## How to Use
 
 ### HTML Structure
 
-Ensure your HTML contains elements with the class name you pass to the plugin. Each container should include elements with the following child classes to display the countdown:
+Add a container with your chosen class name (for example, "countdown"). Inside, include elements with these classes: `.days`, `.hours`, `.minutes`, and `.seconds`.
 
-.days
-.hours
-.minutes
-.seconds
+Example:
 
 ```html
 <div class="countdown">
-    <span class="days"></span> : <span class="hours"></span> : <span class="minutes"></span> :
-    <span class="seconds"></span>
+  <span class="days"></span> : 
+  <span class="hours"></span> : 
+  <span class="minutes"></span> : 
+  <span class="seconds"></span>
 </div>
 ```
 
-You are good to go! 🙂
+### Initialization
 
-### Countdown Mode
+Create a new Countdown instance with your options.
 
-To start a countdown timer, simply pass the destination date in the format "MM/DD/YYYY" to the `destination` option.
+#### Countdown to a Future Date
 
 ```javascript
-const countdown = new Countdown({
-    className: "countdown",
-    destination: "12/12/26",
+new Countdown({
+  className: "countdown",       // The container class name.
+  destination: "12/12/26",      // The target date (MM/DD/YY).
 });
 ```
 
-### Timer Mode
-
-To start a countdown timer with localStorage persistence, pass an array of integers representing the time interval (days, hours, minutes, seconds) to the `destination` option.
+#### Countdown for a Specific Time Interval
 
 ```javascript
-const countdown = new Countdown({
-    className: "countdown",
-    destination: [0, 1, 20, 0], //countdown for 0d 1h 20m 0s
+new Countdown({
+  className: "countdown",
+  destination: [7, 1, 20, 0],   // [days, hours, minutes, seconds]
 });
 ```
+
+---
 
 ## Customization
 
-You can customize the UI elements by updating the class names of the elements dynamically.
+You can style your timer by choosing your own container class. For example:
+
+```html
+<div class="my-custom-countdown">
+  <span class="days"></span> : 
+  <span class="hours"></span> : 
+  <span class="minutes"></span> : 
+  <span class="seconds"></span>
+</div>
+```
+
+And initialize with:
 
 ```javascript
-const countdown = new Countdown({
-    className: "countdown",
-    destination: "12/12/26",
+new Countdown({
+  className: "my-custom-countdown",
+  destination: "12/12/26",
 });
 ```
 
-In this example, the countdown elements will be updated with the class names `.days`, `.hours`, `.minutes`, and `.seconds`.
-
-## How It Works
-
-### Initialization:
-
-The plugin validates the required options (className and destination).
-
-### Mode Determination:
-
-If the destination is an array, it is treated as a timer countdown and uses localStorage to persist remaining time.
-If the destination is a string, it converts it into a timestamp and starts a countdown to that date.
-
-### UI Updates:
-
-The plugin looks for child elements within the specified container that have classes .days, .hours, .minutes, and .seconds and updates them every second.
+---
 
 ## Options
 
-labels - Boolean - default: true - If set to false, the plugin will not update the UI with day(d), hour(h), minute(m), and second(s) labels.
+- **labels:** *(Boolean, default: true)*  
+  Set to false if you don't want the timer to show labels like "d", "h", "m", and "s".
+
+Example:
 
 ```javascript
-const countdown = new Countdown({
-    className: "countdown",
-    destination: "12/12/26",
-    labels: false,
+new Countdown({
+  className: "countdown",
+  destination: "12/12/26",
+  labels: false,
 });
 ```
+
+---
 
 ## Callbacks
 
-You can execute a callback function when the countdown reaches zero by passing a callback function to the `onFinish` option.
+You can run a function when the timer reaches zero. For example:
 
 ```javascript
-const countdown = new Countdown({
-    className: "countdown",
-    destination: "12/12/26",
-    onFinish: () => console.log("Countdown finished!"),
+new Countdown({
+  className: "countdown",
+  destination: "12/12/26",
+  onFinish: () => console.log("Countdown finished!"),
 });
 ```
 
+---
+
+## How It Works
+
+- **Initialization:**  
+  The timer checks for a valid container (className) and a destination.
+  
+- **Mode Selection:**  
+  - If `destination` is an array, it uses Timer Mode with localStorage.
+  - If `destination` is a string, it treats it as a date.
+  
+- **UI Updates:**  
+  The timer finds elements inside your container with the classes `.days`, `.hours`, `.minutes`, and `.seconds` and updates them every second.
+
+---
+
 ## License
 
-Feel free to modify the details (such as the links and license) to fit your project requirements.
+Feel free to modify this project to fit your needs.
